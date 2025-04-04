@@ -1,73 +1,82 @@
-# Predict Rental Prices in Dubai
+# 🏙️ Dubai Rental Price Prediction - Machine Learning Project
 
-## Project Overview
-This project focuses on analyzing and predicting rental prices for properties in Dubai using advanced machine learning techniques. The dataset includes detailed property information such as location, rent, property type, and other relevant features. The goal is to provide insights into the rental market and build a predictive model for estimating rental prices.
+This project focuses on predicting property rental prices in Dubai using various machine learning models. It includes extensive data preprocessing, feature engineering, model training, and evaluation. The project also addresses common real-world challenges such as outliers, categorical encoding, and class imbalance.
 
-## Dataset Description
-The dataset `dubai_properties.csv` contains the following features:
-- **Address**: Property address.
-- **Rent**: Rental price of the property.
-- **Beds**: Number of bedrooms.
-- **Baths**: Number of bathrooms.
-- **Type**: Type of property (e.g., Apartment, Villa).
-- **Area_in_sqft**: Property area in square feet.
-- **Rent_per_sqft**: Rent per square foot.
-- **Rent_category**: Categorized rent levels (Low, Medium, High).
-- **Frequency**: Payment frequency (e.g., Yearly).
-- **Furnishing**: Furnishing status (Furnished/Unfurnished).
-- **Purpose**: Purpose of the listing (e.g., For Rent).
-- **Posted_date**: Date the property was listed.
-- **Age_of_listing_in_days**: Age of the listing in days.
-- **Location**: Specific location of the property.
-- **City**: City where the property is located.
-- **Latitude**: Latitude coordinates of the property.
-- **Longitude**: Longitude coordinates of the property.
+## 📂 Dataset Overview
 
-## Key Steps in the Project
+- **Source**: Property listings dataset
+- **Target Variable**: Rent
+- **Features**: Location, Area, Bedrooms, Bathrooms, Property Type, Furnishing, Date posted, etc.
 
-### Data Preprocessing
-- Loaded the dataset using Pandas and performed initial exploration.
-- Checked for missing values and handled them appropriately.
-- Converted the `Posted_date` column to datetime format and extracted `Year`, `Month`, and `Day`.
-- Dropped irrelevant columns such as `Frequency`, `Purpose`, and `Address`.
+## 🧹 Data Preprocessing
 
-### Exploratory Data Analysis (EDA)
-- Conducted a detailed analysis of the dataset using descriptive statistics.
-- Visualized the distribution of rental categories using pie charts and count plots.
-- Analyzed categorical features and their relationships with rental prices.
+- Missing value imputation using median values.
+- Categorical variables handled with Binary and One-Hot Encoding.
+- Outliers capped using the IQR method.
+- Rare categories grouped under "Other".
+- Feature scaling using MinMaxScaler.
 
-### Feature Engineering
-- Created new features from existing ones, such as extracting date components.
-- Encoded categorical variables using techniques like one-hot encoding and binary encoding.
-- Scaled numerical features using robust scaling to handle outliers.
+## 🧠 Feature Engineering
 
-### Model Building and Evaluation
-- Split the dataset into training and testing sets.
-- Trained multiple machine learning models, including:
-    - **Linear Regression**
-    - **Decision Tree Regressor**
-    - **Random Forest Regressor**
-- Evaluated model performance using metrics such as Mean Squared Error (MSE), Mean Absolute Error (MAE), and R² Score.
-- The **Random Forest Regressor** outperformed other models, providing the most accurate predictions.
+- Extracted Year, Month, and Day from the Posted_date column.
+- Combined different encodings for categorical variables.
+- Applied ExtraTreesRegressor and F-Regression to select the top 50 important features agreed upon by both methods.
 
-### Visualization
-- Plotted histograms and box plots to analyze numerical features.
-- Visualized outliers and distributions of key features.
-- Created count plots to explore categorical data.
+## 🔍 Model Training & Hyperparameter Tuning
 
-## Results
-The **Random Forest Regressor** demonstrated the best performance, achieving high accuracy and robustness in predicting rental prices. The model effectively utilized the provided features to estimate rental values.
+Models trained using GridSearchCV with 5-fold cross-validation:
 
-## Future Enhancements
-- Perform hyperparameter tuning to further improve model accuracy.
-- Explore additional machine learning models and ensemble techniques.
-- Deploy the model as a web application for real-time rental price predictions.
+- Linear Regression
+- Ridge Regression
+- Random Forest
+- Decision Tree
+- Gradient Boosting
+- AdaBoost
+- Bagging
+- XGBoost
 
-## Repository
-The complete project, including the dataset and code, is available in the [GitHub repository](https://github.com/RayanAlDwlah/predict-Rental-Dubai).
+Top 3 models (by R²) used in ensemble techniques.
+
+## 📊 Model Evaluation
+
+Performance metrics used:
+
+- R² (Coefficient of Determination)
+- RMSE (Root Mean Squared Error)
+- MAE (Mean Absolute Error)
+- MSE (Mean Squared Error)
+
+### 📌 Best Individual Models:
+
+- **Random Forest**: R² ≈ 0.99, RMSE ≈ 11.2k
+- **Bagging**: R² ≈ 0.99, RMSE ≈ 11.1k
+
+## 🤝 Ensemble Learning
+
+- **Voting Regressor**: Combines top 3 models with soft voting for better generalization.
+- **Stacking Regressor**: Uses predictions from top 3 models as features for a final estimator (best performing model).
+
+Both ensemble models outperformed individual ones.
+
+## 📈 Visualizations
+
+- Feature importance (ExtraTrees + F-Regression)
+- Evaluation metric comparison charts
+- Threshold tuning plot (for interpretability)
+
+## 📌 Final Notes
+
+This project demonstrates a complete ML pipeline from raw data to deployment-ready models. Special care was taken to ensure generalization, fairness (by handling rare categories), and robustness (handling outliers).
+
+## 💡 Future Enhancements
+
+- Integrate with a real-time dashboard or API.
+- Extend to include price trends over time.
+- Apply deep learning techniques for improved accuracy.
+
 
 ## Author
 - **LinkedIn**: [Rayan Saleh](https://www.linkedin.com/in/rayan-saleh-b12a3132a)
 - **GitHub**: [RayanAlDwlah](https://github.com/RayanAlDwlah)
 
-Feel free to explore the repository, review the code, and contribute to the project!
+Powered by passion for Machine Learning & Real-World Problem Solving 🚀
